@@ -37,32 +37,32 @@
       .glint-main { fill: #ffffff; }
       .glint-soft { fill: #ffd6d6; }
 
-      /* Сверхплавное опускание верхнего века сверху вниз и мягкий подъем */
-      @keyframes upperLidTopDown {
-        0%, 6% { transform: translateY(112px) scaleY(1.48); animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
-        22% { transform: translateY(34px) scaleY(1.16); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
-        34%, 45% { transform: translateY(0px) scaleY(1); animation-timing-function: cubic-bezier(0.32, 0, 0.25, 1); }
+      /* Ресницы и ресничный край плавно опускаются и смыкаются к низу глаза */
+      @keyframes lashCurtainClose {
+        0%, 6% { transform: translateY(118px) scaleY(1.65); }
+        22% { transform: translateY(34px) scaleY(1.2); }
+        34%, 46% { transform: translateY(0px) scaleY(1); }
 
-        /* Плавное моргание сверху вниз на ~4.5s */
-        51.5% { transform: translateY(110px) scaleY(1.46); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
-        58.5% { transform: translateY(0px) scaleY(1); animation-timing-function: ease-in-out; }
-        63%, 88% { transform: translateY(0px) scaleY(1); animation-timing-function: cubic-bezier(0.32, 0, 0.25, 1); }
+        /* Плавное человеческое смыкание ресниц (~4.5s) */
+        51.5% { transform: translateY(116px) scaleY(1.62); }
+        59% { transform: translateY(0px) scaleY(1); }
+        63%, 88% { transform: translateY(0px) scaleY(1); }
 
-        /* Плавное моргание сверху вниз на ~8.5s */
-        94.5% { transform: translateY(108px) scaleY(1.45); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+        /* Плавное смыкание ресниц (~8.5s) */
+        94% { transform: translateY(114px) scaleY(1.6); }
         100% { transform: translateY(0px) scaleY(1); }
       }
 
-      /* Деликатный, едва заметный отклик нижнего века (основное движение идет сверху вниз) */
-      @keyframes lowerLidSubtle {
-        0%, 6% { transform: translateY(-22px) scaleY(1.08); }
-        22% { transform: translateY(-6px) scaleY(1.02); }
-        34%, 45% { transform: translateY(0px) scaleY(1); }
+      /* Небольшой встречный подъем нижних ресниц при смыкании */
+      @keyframes lowerLashesMeet {
+        0%, 6% { transform: translateY(-16px) scaleY(1.1); }
+        22% { transform: translateY(-4px) scaleY(1.03); }
+        34%, 46% { transform: translateY(0px) scaleY(1); }
 
-        51.5% { transform: translateY(-20px) scaleY(1.07); }
-        58.5%, 88% { transform: translateY(0px) scaleY(1); }
+        51.5% { transform: translateY(-15px) scaleY(1.09); }
+        59%, 88% { transform: translateY(0px) scaleY(1); }
 
-        94.5% { transform: translateY(-18px) scaleY(1.06); }
+        94% { transform: translateY(-14px) scaleY(1.08); }
         100% { transform: translateY(0px) scaleY(1); }
       }
 
@@ -79,7 +79,7 @@
         30%, 46% { transform: scale(0.95); }
         51.5% { transform: scale(1.12); }
         59%, 90% { transform: scale(0.96); }
-        94.5% { transform: scale(1.09); }
+        94% { transform: scale(1.09); }
         100% { transform: scale(1); }
       }
 
@@ -94,13 +94,14 @@
         50% { opacity: 1; }
       }
 
-      .upper-lid {
-        transform-origin: 460px 140px;
-        animation: upperLidTopDown 9s infinite;
+      /* Ось трансформации привязана к линии роста верхних ресниц */
+      .upper-lash-lid {
+        transform-origin: 460px 158px;
+        animation: lashCurtainClose 9s cubic-bezier(0.28, 0.05, 0.22, 1) infinite;
       }
-      .lower-lid {
+      .lower-lash-lid {
         transform-origin: 460px 332px;
-        animation: lowerLidSubtle 9s cubic-bezier(0.25, 1, 0.35, 1) infinite;
+        animation: lowerLashesMeet 9s cubic-bezier(0.28, 0.05, 0.22, 1) infinite;
       }
       .eyeball {
         animation: gazeSmooth 9s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
@@ -182,6 +183,7 @@
 
   <rect width="900" height="500" class="bg" />
 
+  <!-- Неподвижная кожа вокруг глаза, бровь и складка верхнего века -->
   <ellipse cx="455" cy="250" rx="400" ry="225" fill="#1b0d06" />
   <ellipse cx="455" cy="250" rx="400" ry="225" fill="url(#skinMatrix)" />
 
@@ -190,6 +192,10 @@
   <ellipse cx="450" cy="365" rx="150" ry="24" fill="url(#skinGlowMatrix)" opacity="0.45" />
 
   <ellipse cx="455" cy="250" rx="400" ry="225" fill="url(#skinVolume)" />
+
+  <!-- Складка верхнего века остается на месте, чтобы двигались именно ресницы и край века -->
+  <path d="M 225,232 C 275,138 395,108 515,122 C 605,132 668,175 702,216" fill="none" stroke="#1f0d05" stroke-width="7" stroke-dasharray="5 2" />
+  <path d="M 235,226 C 285,144 398,116 512,129" fill="none" stroke="#b87856" stroke-width="2.5" stroke-dasharray="4 3" opacity="0.55" />
 
   <g transform="rotate(-5, 260, 75)" opacity="0.92">
     <text x="65" y="54" class="b t-sm brow-mid">01101001011010110100101101010110101001011010110</text>
@@ -272,17 +278,15 @@
   <path d="M 255,294 C 345,326 485,334 615,292" fill="none" stroke="#9e645e" stroke-width="5.5" opacity="0.7" />
   <text x="385" y="324" class="b t-xs waterline-shine" opacity="0.9">1011011011101101101</text>
 
-  <g class="upper-lid">
-    <path d="M 190,105 L 725,105 L 725,252 C 655,212 578,167 475,160 C 365,152 252,195 218,278 L 190,278 Z" fill="#211008" />
-    <path d="M 190,105 L 725,105 L 725,252 C 655,212 578,167 475,160 C 365,152 252,195 218,278 L 190,278 Z" fill="url(#skinMatrix)" />
-
-    <path d="M 255,212 C 325,152 465,134 585,178 C 525,155 375,142 255,212 Z" fill="url(#skinGlowMatrix)" opacity="0.65" />
-
-    <path d="M 225,232 C 275,138 395,108 515,122 C 605,132 668,175 702,216" fill="none" stroke="#1f0d05" stroke-width="7" stroke-dasharray="5 2" />
-    <path d="M 235,226 C 285,144 398,116 512,129" fill="none" stroke="#b87856" stroke-width="2.5" stroke-dasharray="4 3" opacity="0.55" />
+  <!-- ПОДВИЖНАЯ ШТОРКА ВЕРХНИХ РЕСНИЦ И РЕСНИЧНОГО КРАЯ (смыкаются вниз) -->
+  <g class="upper-lash-lid">
+    <!-- Тонкая кожаная полоса у основания ресниц, закрывающая глаз при смыкании -->
+    <path d="M 195,130 L 720,130 L 720,250 C 655,212 578,167 475,160 C 365,152 252,195 218,278 L 195,278 Z" fill="#211008" />
+    <path d="M 195,130 L 720,130 L 720,250 C 655,212 578,167 475,160 C 365,152 252,195 218,278 L 195,278 Z" fill="url(#skinMatrix)" />
 
     <path d="M 222,272 C 260,192 368,151 478,159 C 578,166 655,211 702,248" fill="none" stroke="#0d0402" stroke-width="5.5" />
 
+    <!-- Ресницы, которые плавно опускаются и смыкаются с нижними -->
     <g class="b t-sm lash-core">
       <text x="262" y="212" transform="rotate(-46, 262, 212)">101101</text>
       <text x="288" y="192" transform="rotate(-38, 288, 192)">0110101</text>
@@ -309,7 +313,8 @@
     </g>
   </g>
 
-  <g class="lower-lid">
+  <!-- НИЖНИЕ РЕСНИЦЫ И КОЖА ПОД ГЛАЗОМ -->
+  <g class="lower-lash-lid">
     <path d="M 190,278 L 218,278 C 268,308 350,332 458,332 C 565,332 652,298 702,248 L 725,248 L 725,400 L 190,400 Z" fill="#211008" />
     <path d="M 190,278 L 218,278 C 268,308 350,332 458,332 C 565,332 652,298 702,248 L 725,248 L 725,400 L 190,400 Z" fill="url(#skinMatrix)" />
 
@@ -331,5 +336,4 @@
 
   <rect width="900" height="500" fill="url(#edgeFade)" pointer-events="none" />
 </svg>
-
-        
+                                                                         
