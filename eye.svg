@@ -1,0 +1,335 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" height="100%">
+  <defs>
+    <style>
+      .bg { fill: #050507; }
+      .b {
+        font-family: 'Courier New', Courier, monospace;
+        font-weight: 700;
+        user-select: none;
+      }
+      .t-xs { font-size: 8px; letter-spacing: 0.8px; }
+      .t-sm { font-size: 9.5px; letter-spacing: 1px; }
+
+      .skin-shadow { fill: #472514; }
+      .skin-mid { fill: #754329; }
+      .skin-warm { fill: #9c5f3e; }
+      .skin-highlight { fill: #c48460; }
+      .skin-gloss { fill: #dfa382; }
+
+      .brow-dark { fill: #1c0d06; }
+      .brow-mid { fill: #381c0e; }
+      .lash-core { fill: #0d0502; }
+      .lash-tip { fill: #291309; }
+
+      .sclera-bright { fill: #e6d7d5; }
+      .sclera-mid { fill: #baa5a2; }
+      .sclera-shadow { fill: #7d6765; }
+      .vein { fill: #9e312e; }
+      .tear-pink { fill: #b85b56; }
+      .tear-gloss { fill: #f2c2be; }
+      .waterline-shine { fill: #ffffff; }
+
+      .iris-dark { fill: #690707; }
+      .iris-crimson { fill: #b81111; }
+      .iris-scarlet { fill: #eb2323; }
+      .iris-core-glow { fill: #ff5436; }
+      .pupil { fill: #040101; }
+      .glint-main { fill: #ffffff; }
+      .glint-soft { fill: #ffd6d6; }
+
+      /* Сверхплавное опускание верхнего века сверху вниз и мягкий подъем */
+      @keyframes upperLidTopDown {
+        0%, 6% { transform: translateY(112px) scaleY(1.48); animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+        22% { transform: translateY(34px) scaleY(1.16); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+        34%, 45% { transform: translateY(0px) scaleY(1); animation-timing-function: cubic-bezier(0.32, 0, 0.25, 1); }
+
+        /* Плавное моргание сверху вниз на ~4.5s */
+        51.5% { transform: translateY(110px) scaleY(1.46); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+        58.5% { transform: translateY(0px) scaleY(1); animation-timing-function: ease-in-out; }
+        63%, 88% { transform: translateY(0px) scaleY(1); animation-timing-function: cubic-bezier(0.32, 0, 0.25, 1); }
+
+        /* Плавное моргание сверху вниз на ~8.5s */
+        94.5% { transform: translateY(108px) scaleY(1.45); animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1); }
+        100% { transform: translateY(0px) scaleY(1); }
+      }
+
+      /* Деликатный, едва заметный отклик нижнего века (основное движение идет сверху вниз) */
+      @keyframes lowerLidSubtle {
+        0%, 6% { transform: translateY(-22px) scaleY(1.08); }
+        22% { transform: translateY(-6px) scaleY(1.02); }
+        34%, 45% { transform: translateY(0px) scaleY(1); }
+
+        51.5% { transform: translateY(-20px) scaleY(1.07); }
+        58.5%, 88% { transform: translateY(0px) scaleY(1); }
+
+        94.5% { transform: translateY(-18px) scaleY(1.06); }
+        100% { transform: translateY(0px) scaleY(1); }
+      }
+
+      @keyframes gazeSmooth {
+        0%, 22% { transform: translate(0px, 2px); }
+        32%, 44% { transform: translate(-15px, -3px); }
+        56%, 72% { transform: translate(14px, 3px); }
+        82%, 90% { transform: translate(9px, 1px); }
+        96%, 100% { transform: translate(0px, 0px); }
+      }
+
+      @keyframes pupilReact {
+        0%, 20% { transform: scale(1.15); }
+        30%, 46% { transform: scale(0.95); }
+        51.5% { transform: scale(1.12); }
+        59%, 90% { transform: scale(0.96); }
+        94.5% { transform: scale(1.09); }
+        100% { transform: scale(1); }
+      }
+
+      @keyframes irisShimmer {
+        0%, 100% { opacity: 0.88; }
+        35% { opacity: 1; }
+        70% { opacity: 0.92; }
+      }
+
+      @keyframes glintBreath {
+        0%, 100% { opacity: 0.92; }
+        50% { opacity: 1; }
+      }
+
+      .upper-lid {
+        transform-origin: 460px 140px;
+        animation: upperLidTopDown 9s infinite;
+      }
+      .lower-lid {
+        transform-origin: 460px 332px;
+        animation: lowerLidSubtle 9s cubic-bezier(0.25, 1, 0.35, 1) infinite;
+      }
+      .eyeball {
+        animation: gazeSmooth 9s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+      }
+      .pupil-dynamic {
+        transform-origin: 462px 245px;
+        animation: pupilReact 9s ease-in-out infinite;
+      }
+      .iris-shimmer {
+        animation: irisShimmer 4s ease-in-out infinite;
+      }
+      .glint-breath {
+        animation: glintBreath 3s ease-in-out infinite;
+      }
+    </style>
+
+    <clipPath id="eyeAperture">
+      <path d="M 218,278 C 252,195 365,152 475,160 C 578,167 655,212 702,248 C 652,298 565,332 458,332 C 350,332 268,308 218,278 Z" />
+    </clipPath>
+
+    <clipPath id="glintClip">
+      <path d="M 476,192 C 505,192 528,210 532,232 C 516,242 496,242 484,228 C 474,216 472,202 476,192 Z" />
+    </clipPath>
+
+    <radialGradient id="skinVolume" cx="38%" cy="46%" r="58%">
+      <stop offset="0%" stop-color="#c48460" stop-opacity="0.32" />
+      <stop offset="45%" stop-color="#754329" stop-opacity="0.18" />
+      <stop offset="82%" stop-color="#1a0b05" stop-opacity="0.72" />
+      <stop offset="100%" stop-color="#050507" stop-opacity="1" />
+    </radialGradient>
+
+    <radialGradient id="eyeballSphere" cx="48%" cy="46%" r="52%">
+      <stop offset="55%" stop-color="#000000" stop-opacity="0" />
+      <stop offset="84%" stop-color="#2b1615" stop-opacity="0.45" />
+      <stop offset="100%" stop-color="#120606" stop-opacity="0.88" />
+    </radialGradient>
+
+    <radialGradient id="irisDepth" cx="50%" cy="50%" r="50%">
+      <stop offset="28%" stop-color="#ff5436" stop-opacity="0.45" />
+      <stop offset="58%" stop-color="#b81111" stop-opacity="0.25" />
+      <stop offset="88%" stop-color="#3d0303" stop-opacity="0.75" />
+      <stop offset="100%" stop-color="#140101" stop-opacity="0.95" />
+    </radialGradient>
+
+    <radialGradient id="edgeFade" cx="50%" cy="50%" r="52%">
+      <stop offset="52%" stop-color="#050507" stop-opacity="0" />
+      <stop offset="86%" stop-color="#050507" stop-opacity="0.82" />
+      <stop offset="100%" stop-color="#050507" stop-opacity="1" />
+    </radialGradient>
+
+    <pattern id="skinMatrix" width="96" height="36" patternUnits="userSpaceOnUse">
+      <text x="0" y="8" class="b t-xs skin-mid">011010011011010</text>
+      <text x="0" y="17" class="b t-xs skin-warm">100101100100101</text>
+      <text x="0" y="26" class="b t-xs skin-mid">010111001101010</text>
+      <text x="0" y="35" class="b t-xs skin-shadow">110010110011001</text>
+    </pattern>
+
+    <pattern id="skinGlowMatrix" width="84" height="32" patternUnits="userSpaceOnUse">
+      <text x="0" y="8" class="b t-xs skin-highlight">1011010110101</text>
+      <text x="0" y="16" class="b t-xs skin-gloss">0111011011101</text>
+      <text x="0" y="24" class="b t-xs skin-highlight">1010110101101</text>
+      <text x="0" y="32" class="b t-xs skin-warm">0101101010110</text>
+    </pattern>
+
+    <pattern id="scleraMatrix" width="90" height="34" patternUnits="userSpaceOnUse">
+      <text x="0" y="8" class="b t-xs sclera-bright">10100101011010</text>
+      <text x="0" y="16" class="b t-xs sclera-mid">01011010100101</text>
+      <text x="0" y="25" class="b t-xs sclera-bright">11001010011011</text>
+      <text x="0" y="33" class="b t-xs sclera-shadow">00110101100100</text>
+    </pattern>
+
+    <pattern id="irisBaseMatrix" width="76" height="28" patternUnits="userSpaceOnUse">
+      <text x="0" y="7" class="b t-xs iris-crimson">101101011010</text>
+      <text x="0" y="14" class="b t-xs iris-dark">010010100101</text>
+      <text x="0" y="21" class="b t-xs iris-scarlet">111010011101</text>
+      <text x="0" y="28" class="b t-xs iris-dark">001011100010</text>
+    </pattern>
+  </defs>
+
+  <rect width="900" height="500" class="bg" />
+
+  <ellipse cx="455" cy="250" rx="400" ry="225" fill="#1b0d06" />
+  <ellipse cx="455" cy="250" rx="400" ry="225" fill="url(#skinMatrix)" />
+
+  <ellipse cx="445" cy="128" rx="165" ry="26" fill="url(#skinGlowMatrix)" opacity="0.75" />
+  <ellipse cx="215" cy="315" rx="75" ry="52" fill="url(#skinGlowMatrix)" opacity="0.82" />
+  <ellipse cx="450" cy="365" rx="150" ry="24" fill="url(#skinGlowMatrix)" opacity="0.45" />
+
+  <ellipse cx="455" cy="250" rx="400" ry="225" fill="url(#skinVolume)" />
+
+  <g transform="rotate(-5, 260, 75)" opacity="0.92">
+    <text x="65" y="54" class="b t-sm brow-mid">01101001011010110100101101010110101001011010110</text>
+    <text x="80" y="64" class="b t-sm brow-dark">1011010010110101101001011010101101010010110101101</text>
+    <text x="95" y="74" class="b t-sm brow-dark">010110101101001011010101101011010100101101011010</text>
+    <text x="120" y="84" class="b t-sm brow-mid">11010010110101011010110101001011010110100101101</text>
+    <text x="155" y="94" class="b t-xs skin-shadow">010110101011010110101001011010110100101101</text>
+  </g>
+
+  <g clip-path="url(#eyeAperture)">
+    <rect x="200" y="140" width="520" height="220" fill="#3a2928" />
+    <rect x="200" y="140" width="520" height="220" fill="url(#scleraMatrix)" />
+
+    <g class="b t-xs vein" opacity="0.72">
+      <text x="255" y="254" transform="rotate(-8, 255, 254)">10110101</text>
+      <text x="275" y="272" transform="rotate(11, 275, 272)">0101101</text>
+      <text x="582" y="246" transform="rotate(-10, 582, 246)">110101101</text>
+      <text x="598" y="264" transform="rotate(7, 598, 264)">01101011</text>
+      <text x="615" y="236" transform="rotate(-16, 615, 236)">1010110</text>
+    </g>
+
+    <path d="M 212,276 C 228,248 256,246 268,268 C 256,292 228,294 212,276 Z" fill="#591f1d" />
+    <text x="220" y="268" class="b t-xs tear-pink">101101</text>
+    <text x="223" y="276" class="b t-xs tear-gloss">011101</text>
+    <text x="222" y="284" class="b t-xs tear-pink">10101</text>
+
+    <g class="eyeball">
+      <circle cx="462" cy="245" r="88" fill="#1f0202" />
+      <circle cx="462" cy="245" r="85" fill="url(#irisBaseMatrix)" class="iris-shimmer" />
+
+      <g transform="translate(462, 245)" class="iris-shimmer">
+        <g transform="rotate(0)"><text x="29" y="3" class="b t-xs iris-scarlet">1011010110</text></g>
+        <g transform="rotate(20)"><text x="29" y="3" class="b t-xs iris-crimson">0110101101</text></g>
+        <g transform="rotate(40)"><text x="29" y="3" class="b t-xs iris-scarlet">1101001011</text></g>
+        <g transform="rotate(60)"><text x="29" y="3" class="b t-xs iris-core-glow">1010110101</text></g>
+        <g transform="rotate(80)"><text x="29" y="3" class="b t-xs iris-crimson">0101101010</text></g>
+        <g transform="rotate(100)"><text x="29" y="3" class="b t-xs iris-scarlet">1101001011</text></g>
+        <g transform="rotate(120)"><text x="29" y="3" class="b t-xs iris-crimson">0010110100</text></g>
+        <g transform="rotate(140)"><text x="29" y="3" class="b t-xs iris-scarlet">1011010110</text></g>
+        <g transform="rotate(160)"><text x="29" y="3" class="b t-xs iris-core-glow">0110101101</text></g>
+        <g transform="rotate(180)"><text x="29" y="3" class="b t-xs iris-scarlet">1101001011</text></g>
+        <g transform="rotate(200)"><text x="29" y="3" class="b t-xs iris-crimson">1010110101</text></g>
+        <g transform="rotate(220)"><text x="29" y="3" class="b t-xs iris-scarlet">0101101010</text></g>
+        <g transform="rotate(240)"><text x="29" y="3" class="b t-xs iris-crimson">1101001011</text></g>
+        <g transform="rotate(260)"><text x="29" y="3" class="b t-xs iris-scarlet">0010110100</text></g>
+        <g transform="rotate(280)"><text x="29" y="3" class="b t-xs iris-core-glow">1011010110</text></g>
+        <g transform="rotate(300)"><text x="29" y="3" class="b t-xs iris-crimson">0110101101</text></g>
+        <g transform="rotate(320)"><text x="29" y="3" class="b t-xs iris-scarlet">1101001011</text></g>
+        <g transform="rotate(340)"><text x="29" y="3" class="b t-xs iris-crimson">1010110101</text></g>
+
+        <circle cx="0" cy="0" r="38" fill="none" stroke="#ff4529" stroke-width="2.5" stroke-dasharray="3 2" opacity="0.85" />
+      </g>
+
+      <circle cx="462" cy="245" r="87" fill="url(#irisDepth)" />
+
+      <g class="pupil-dynamic">
+        <circle cx="462" cy="245" r="30" fill="#040101" />
+        <text x="441" y="236" class="b t-xs pupil">0000000</text>
+        <text x="438" y="245" class="b t-xs pupil">00010000</text>
+        <text x="441" y="254" class="b t-xs pupil">0000000</text>
+      </g>
+
+      <g clip-path="url(#glintClip)" class="glint-breath">
+        <rect x="470" y="188" width="68" height="58" fill="#ffffff" opacity="0.22" />
+        <text x="474" y="198" class="b t-xs glint-main">1011101101</text>
+        <text x="472" y="207" class="b t-xs glint-main">0111111011</text>
+        <text x="474" y="216" class="b t-xs glint-main">1101111101</text>
+        <text x="478" y="225" class="b t-xs glint-main">011111110</text>
+        <text x="484" y="234" class="b t-xs glint-soft">10111101</text>
+        <path d="M 482,190 Q 485,204 483,212 M 490,190 Q 493,205 491,214 M 498,191 Q 501,206 499,215 M 506,193 Q 509,207 507,216 M 514,196 Q 517,209 515,217 M 522,200 Q 524,212 522,219" stroke="#1c0808" stroke-width="1.6" fill="none" opacity="0.85" />
+      </g>
+
+      <text x="432" y="272" class="b t-xs glint-soft" opacity="0.7">101</text>
+    </g>
+
+    <rect x="210" y="145" width="500" height="200" fill="url(#eyeballSphere)" />
+    <path d="M 215,150 C 350,132 540,145 705,248 L 705,198 C 565,165 360,152 218,265 Z" fill="#0a0302" opacity="0.62" />
+  </g>
+
+  <path d="M 255,294 C 345,326 485,334 615,292" fill="none" stroke="#9e645e" stroke-width="5.5" opacity="0.7" />
+  <text x="385" y="324" class="b t-xs waterline-shine" opacity="0.9">1011011011101101101</text>
+
+  <g class="upper-lid">
+    <path d="M 190,105 L 725,105 L 725,252 C 655,212 578,167 475,160 C 365,152 252,195 218,278 L 190,278 Z" fill="#211008" />
+    <path d="M 190,105 L 725,105 L 725,252 C 655,212 578,167 475,160 C 365,152 252,195 218,278 L 190,278 Z" fill="url(#skinMatrix)" />
+
+    <path d="M 255,212 C 325,152 465,134 585,178 C 525,155 375,142 255,212 Z" fill="url(#skinGlowMatrix)" opacity="0.65" />
+
+    <path d="M 225,232 C 275,138 395,108 515,122 C 605,132 668,175 702,216" fill="none" stroke="#1f0d05" stroke-width="7" stroke-dasharray="5 2" />
+    <path d="M 235,226 C 285,144 398,116 512,129" fill="none" stroke="#b87856" stroke-width="2.5" stroke-dasharray="4 3" opacity="0.55" />
+
+    <path d="M 222,272 C 260,192 368,151 478,159 C 578,166 655,211 702,248" fill="none" stroke="#0d0402" stroke-width="5.5" />
+
+    <g class="b t-sm lash-core">
+      <text x="262" y="212" transform="rotate(-46, 262, 212)">101101</text>
+      <text x="288" y="192" transform="rotate(-38, 288, 192)">0110101</text>
+      <text x="316" y="176" transform="rotate(-28, 316, 176)">10110101</text>
+      <text x="348" y="165" transform="rotate(-18, 348, 165)">010110110</text>
+      <text x="382" y="158" transform="rotate(-8, 382, 158)">1101011010</text>
+      <text x="418" y="155" transform="rotate(4, 418, 155)">01101011011</text>
+      <text x="456" y="156" transform="rotate(14, 456, 156)">101101011011</text>
+      <text x="494" y="162" transform="rotate(24, 494, 162)">010110101101</text>
+      <text x="532" y="172" transform="rotate(33, 532, 172)">110101101011</text>
+      <text x="568" y="185" transform="rotate(41, 568, 185)">011010110101</text>
+      <text x="602" y="201" transform="rotate(48, 602, 201)">10110101101</text>
+      <text x="634" y="218" transform="rotate(54, 634, 218)">0101101011</text>
+      <text x="664" y="234" transform="rotate(60, 664, 234)">11010110</text>
+    </g>
+    <g class="b t-xs lash-tip">
+      <text x="398" y="118" transform="rotate(-4, 398, 118)">0110</text>
+      <text x="444" y="114" transform="rotate(8, 444, 114)">1011</text>
+      <text x="492" y="118" transform="rotate(19, 492, 118)">0101</text>
+      <text x="542" y="128" transform="rotate(29, 542, 128)">1101</text>
+      <text x="592" y="144" transform="rotate(38, 592, 144)">0110</text>
+      <text x="642" y="166" transform="rotate(46, 642, 166)">1011</text>
+      <text x="688" y="192" transform="rotate(53, 688, 192)">010</text>
+    </g>
+  </g>
+
+  <g class="lower-lid">
+    <path d="M 190,278 L 218,278 C 268,308 350,332 458,332 C 565,332 652,298 702,248 L 725,248 L 725,400 L 190,400 Z" fill="#211008" />
+    <path d="M 190,278 L 218,278 C 268,308 350,332 458,332 C 565,332 652,298 702,248 L 725,248 L 725,400 L 190,400 Z" fill="url(#skinMatrix)" />
+
+    <path d="M 265,324 C 355,362 505,368 625,322" fill="none" stroke="#36190b" stroke-width="4.5" stroke-dasharray="5 3" opacity="0.8" />
+    <path d="M 290,342 C 375,375 495,378 595,342" fill="none" stroke="#241006" stroke-width="3" stroke-dasharray="4 4" opacity="0.6" />
+
+    <g class="b t-xs lash-core">
+      <text x="292" y="314" transform="rotate(76, 292, 314)">10110</text>
+      <text x="332" y="326" transform="rotate(82, 332, 326)">010110</text>
+      <text x="374" y="334" transform="rotate(88, 374, 334)">110101</text>
+      <text x="418" y="338" transform="rotate(94, 418, 338)">0110110</text>
+      <text x="462" y="338" transform="rotate(100, 462, 338)">1010110</text>
+      <text x="506" y="333" transform="rotate(107, 506, 333)">011010</text>
+      <text x="548" y="324" transform="rotate(114, 548, 324)">10110</text>
+      <text x="588" y="310" transform="rotate(121, 588, 310)">0101</text>
+      <text x="624" y="292" transform="rotate(128, 624, 292)">101</text>
+    </g>
+  </g>
+
+  <rect width="900" height="500" fill="url(#edgeFade)" pointer-events="none" />
+</svg>
+
+        
